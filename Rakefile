@@ -11,7 +11,9 @@ task :install do
   files << "oh-my-zsh/custom/rbates.zsh-theme"
   files.each do |file|
     system %Q{mkdir -p "$HOME/.#{File.dirname(file)}"} if file =~ /\//
-    if File.exist?(File.join(ENV['HOME'], ".#{file.sub(/\.erb$/, '')}"))
+    if %w(zshrc bashrc).include? file
+      system %Q{cat "$PWD/#{file}" >> "$HOME/.#{file}"}
+    elsif File.exist?(File.join(ENV['HOME'], ".#{file.sub(/\.erb$/, '')}"))
       if File.identical? file, File.join(ENV['HOME'], ".#{file.sub(/\.erb$/, '')}")
         puts "identical ~/.#{file.sub(/\.erb$/, '')}"
       elsif replace_all
