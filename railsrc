@@ -3,7 +3,7 @@
 begin
   require 'hirb-unicode' # sudo gem install cldwalker-hirb --source http://gems.github.com
   Hirb.enable
-rescue LoadError
+rescue LoadError # rubocop:disable Lint/SuppressedException
 end
 
 def change_log(stream)

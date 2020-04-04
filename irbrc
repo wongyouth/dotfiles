@@ -9,10 +9,8 @@ IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb_history"
 IRB.conf[:PROMPT_MODE] = :SIMPLE
 
 %w[rubygems looksee wirble interactive_editor].each do |gem|
-  begin
-    require gem
-  rescue LoadError
-  end
+  require gem
+rescue LoadError # rubocop:disable Lint/SuppressedException
 end
 
 if defined? Wirble
@@ -20,12 +18,13 @@ if defined? Wirble
   Wirble.colorize
 end
 
+# nodoc
 class Object
   # list methods which aren't in superclass
   def local_methods(obj = self)
     (obj.methods - obj.class.superclass.instance_methods).sort
   end
-  
+
   # print documentation
   #
   #   ri 'Array#pop'
@@ -34,7 +33,7 @@ class Object
   #   arr.ri :pop
   def ri(method = nil)
     unless method && method =~ /^[A-Z]/ # if class isn't specified
-      klass = self.kind_of?(Class) ? name : self.class.name
+      klass = is_a?(Class) ? name : self.class.name
       method = [klass, method].compact.join('#')
     end
     system 'ri', method.to_s
@@ -47,7 +46,7 @@ end
 
 def copy_history
   history = Readline::HISTORY.entries
-  index = history.rindex("exit") || -1
+  index = history.rindex('exit') || -1
   content = history[(index+1)..-2].join("\n")
   puts content
   copy content
@@ -57,4 +56,9 @@ def paste
   `pbpaste`
 end
 
-load File.dirname(__FILE__) + '/.railsrc' if ($0 == 'irb' && ENV['RAILS_ENV']) || ($0 == 'script/rails' && Rails.env)
+def in_rails?
+  ($PROGRAM_NAME == 'irb' && ENV['RAILS_ENV']) ||
+    ($PROGRAM_NAME == 'bin/rails' && Rails.env)
+end
+
+load File.dirname(__FILE__) + '/.railsrc' if in_rails?

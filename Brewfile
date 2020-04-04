@@ -1,0 +1,17 @@
+ack
+autojump
+git
+gh
+rbenv
+mysql@5.7
+nvm
+node
+python
+postgresql
+redis
+ruby-build
+ssh-copy-id
+tig
+wget
+yarn
+zsh
