@@ -5,10 +5,6 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 export LDFLAGS="-L/usr/local/opt/icu4c/lib"
 export CPPFLAGS="-I/usr/local/opt/icu4c/include"
 
-# alias chrome="open /Applications/Google\ Chrome.app --args --disable-web-security"
-
-alias dc='docker-compose'
-
 # NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
@@ -18,3 +14,5 @@ export EDITOR=`which code`
 
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+
+source ~/.alias

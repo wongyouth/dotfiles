@@ -5,9 +5,16 @@ require 'erb'
 
 desc "install the dot files into user's home directory"
 task :install do
-  install_oh_my_zsh
-  switch_to_zsh
+  if system_has_zsh?
+    install_oh_my_zsh
+    switch_to_zsh
+  end
+
   CopyDotFiles.new.run
+end
+
+def system_has_zsh?
+  system('which zsh')
 end
 
 def install_oh_my_zsh
@@ -58,6 +65,7 @@ end
 class CopyDotFiles
   attr_reader :replace_all
 
+  FILES = Rake::FileList["*", "config/**/*"]
   FILES_OVERWRITE = %w[zshrc bashrc].freeze
   FILES_DO_NOT_COPY = %w[Rakefile README.rdoc LICENSE oh-my-zsh].freeze
 
@@ -66,10 +74,7 @@ class CopyDotFiles
   end
 
   def files_need_copy
-    # files = Dir['*'] - FILES_DO_NOT_COPY
-    # files << 'oh-my-zsh/custom/plugins/rbates'
-    # files << 'oh-my-zsh/custom/rbates.zsh-theme'
-    Dir['*'] - FILES_DO_NOT_COPY
+    FILES - FILES_DO_NOT_COPY
   end
 
   private
