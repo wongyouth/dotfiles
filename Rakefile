@@ -33,11 +33,18 @@ def ask_install_ohmyzsh
   when 'y'
     puts 'installing oh-my-zsh'
     system %(git clone #{OHMYZSH_REPO} "$HOME/.oh-my-zsh")
+    install_zsh_autosuggestions
   when 'q'
     exit
   else
     puts 'skipping oh-my-zsh, you will need to change ~/.zshrc'
   end
+end
+
+AUTOSUG_REPO = 'https://github.com/zsh-users/zsh-autosuggestions'
+
+def install_zsh_autosuggestions
+  system %(git clone #{AUTOSUG_REPO} $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions)
 end
 
 def switch_to_zsh

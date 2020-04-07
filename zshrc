@@ -51,6 +51,7 @@ plugins=(
   git ssh-agent nvm
   rails rake-fast ruby rbenv bundler
   autojump docker
+  zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
