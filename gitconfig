@@ -36,4 +36,4 @@
 [difftool "diffmerge"]
 	cmd = diffmerge --nosplash \"$LOCAL\" \"$REMOTE\"
 [credential]
-	helper = "!f() { /root/.vscode-server/bin/0ba0ca52957102ca3527cf479571617f0de6ed50/node /tmp/vscode-remote-containers-1fd9432cd640813eabd5c2a1201dfd22123781fc.js $*; }; f"
+	helper = osxkeychain
