@@ -1,4 +1,7 @@
 export LC_ALL=$LANG
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US
+
 export ERL_AFLAGS="-kernel shell_history enabled"
 
 # for charlock_holmes
@@ -14,5 +17,7 @@ export EDITOR=`which code`
 
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+
+eval "$(hub alias -s)"
 
 source ~/.alias
