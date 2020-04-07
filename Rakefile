@@ -65,11 +65,12 @@ end
 class CopyDotFiles
   attr_reader :replace_all
 
-  FILES = Rake::FileList["*", "config/**/*"]
+  FILES = Rake::FileList["*", "config/*/*"] - ['config']
   FILES_OVERWRITE = %w[zshrc bashrc].freeze
   FILES_DO_NOT_COPY = %w[Rakefile README.rdoc LICENSE oh-my-zsh].freeze
 
   def run
+    puts files_need_copy
     files_need_copy.each { |f| copy_file(f) }
   end
 
