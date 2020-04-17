@@ -8,9 +8,9 @@ IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb_history"
 
 IRB.conf[:PROMPT_MODE] = :SIMPLE
 
-%w[rubygems looksee wirble interactive_editor].each do |gem|
+%w[looksee brice interactive_editor].each do |gem|
   require gem
-rescue LoadError # rubocop:disable Lint/SuppressedException
+rescue LoadError
 end
 
 if defined? Wirble
